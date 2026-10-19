@@ -87,7 +87,7 @@ jobs:
           /tmp/smoke/bin/pip install dist/*.whl
           cd /tmp
           /tmp/smoke/bin/python -c "import cambodia_geo as kh; assert kh.provinces(); print(kh.__version__, kh.DATA_YEAR)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
