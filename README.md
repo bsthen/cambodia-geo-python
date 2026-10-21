@@ -95,7 +95,9 @@ The bundled MEF files are shipped exactly as published. The 2025 dataset contain
 ## Data & licence
 
 The code is MIT licensed. The bundled data comes from the Ministry of Economy and Finance
-([data.mef.gov.kh](https://data.mef.gov.kh), [terms of use](https://data.mef.gov.kh/terms-of-use)) and remains subject to its terms.
+([data.mef.gov.kh](https://data.mef.gov.kh), [terms of use](https://data.mef.gov.kh/terms-of-use)), used with
+attribution, and remains subject to its terms (see [NOTICE](NOTICE)). This project is not affiliated with or
+endorsed by the Ministry of Economy and Finance.
 
 ## ភាសាខ្មែរ (សង្ខេប)
 
@@ -104,4 +106,5 @@ The code is MIT licensed. The bundled data comes from the Ministry of Economy an
 
 ## Contributing
 
-`pip install -e ".[dev]"` then `pytest`. See [RELEASING.md](RELEASING.md).
+`pip install -e ".[dev]"` then `pytest`. See [RELEASING.md](RELEASING.md). The behaviour shared with the
+JavaScript and PHP packages is defined in [SPEC.md](SPEC.md) and checked by `spec/conformance.json`.

@@ -56,6 +56,18 @@ def _code_key(code: Any) -> str:
     return _norm(code)
 
 
+def _query_text(query: Any) -> Optional[str]:
+    """Text of a ``str`` or non-negative ``int`` query. ``None`` for anything else
+    (floats, booleans, negative numbers, ``None``, ...), which matches nothing."""
+    if isinstance(query, bool):
+        return None
+    if isinstance(query, str):
+        return query.strip()
+    if isinstance(query, int) and query >= 0:
+        return str(query)
+    return None
+
+
 # --------------------------------------------------------------------------- #
 # Loading & indexing
 # --------------------------------------------------------------------------- #
@@ -175,9 +187,9 @@ def _resolve(level: str, query: Any, scope: Any = None) -> Optional[Any]:
     """
     if isinstance(query, _CLASSES[level]):
         return query
-    if isinstance(query, bool) or not isinstance(query, (str, int)):
+    text = _query_text(query)
+    if text is None:
         return None
-    text = str(query).strip()
     name_key = _norm(text)
     if not name_key:
         return None
@@ -291,7 +303,9 @@ def search(query: Query, *, level: Optional[str] = None, limit: Optional[int] = 
         raise ValueError(f"level must be one of {LEVELS} or None, got {level!r}")
     if limit is not None and limit < 0:
         raise ValueError("limit must be >= 0 or None")
-    text = str(query).strip()
+    text = _query_text(query)
+    if text is None:
+        return []
     name_key = _norm(text)
     if not name_key:
         return []
